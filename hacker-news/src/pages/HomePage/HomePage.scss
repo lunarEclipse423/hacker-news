@@ -1,0 +1,62 @@
+@import "../../sass/abstract/constants";
+@import "../../sass/abstract/placeholders";
+@import "../../sass/abstract/mixins";
+
+.news-feed {
+  width: 45vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-items-wrapper {
+  padding-top: 12px;
+}
+
+.home-title {
+  text-align: center;
+}
+
+.tools {
+  margin: 10px 0;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trending-text {
+  @extend %font-secondary;
+  @include font(2rem, 2.3rem, 700);
+}
+
+.current-date {
+  @extend %font-primary;
+  @include font(1.3rem, 1.6rem, 400);
+  color: $color-current-date;
+}
+
+.sub-text__date {
+  margin-top: 5px;
+}
+
+.refresh-icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url("../../svg/icon_refresh.svg");
+  &:hover {
+    animation-name: rotate;
+    animation-duration: 1s;
+    cursor: pointer;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

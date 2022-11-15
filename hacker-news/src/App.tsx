@@ -1,11 +1,12 @@
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRouter from "./components/AppRouter/AppRouter";
+
 const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
+      <Router>
+        <AppRouter />
+      </Router>
     </div>
   );
 };

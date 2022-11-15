@@ -1,0 +1,28 @@
+@import "../../sass/abstract/constants";
+@import "../../sass/abstract/placeholders";
+@import "../../sass/abstract/mixins";
+
+html {
+  font-size: 10px;
+}
+
+body {
+  margin-top: 20px;
+}
+
+h1 {
+  @extend %font-secondary;
+  @include font(3rem, 3.7rem, 700);
+  color: $color-text;
+}
+
+h2 {
+  @extend %font-secondary;
+  color: $color-text;
+}
+
+h3 {
+  @extend %font-secondary;
+  @include font(2rem, 2.3rem, 700);
+  color: $color-text;
+}
