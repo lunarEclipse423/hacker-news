@@ -3,7 +3,7 @@ import NewsItem from "../../components/NewsItem/NewsItem";
 import { useNewsListActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { getNewsIds } from "../../api/service";
-import { showDate } from "../../utils/time";
+import { getDate } from "../../utils/time";
 import "./HomePage.scss";
 
 const HomePage = () => {
@@ -42,13 +42,13 @@ const HomePage = () => {
       <div className="tools">
         <div className="current-date-text">
           <p className="trending-text">Trending</p>
-          <p className="current-date sub-text__date">{showDate()}</p>
+          <p className="current-date sub-text__date">{getDate()}</p>
         </div>
-        <span className="refresh-icon" onClick={() => fetchNews()}></span>
+        <span className="refresh-icon" onClick={fetchNews}></span>
       </div>
       <div className="news-items-wrapper">
         {isNewsListLoading ? (
-          <h2>Loading...</h2>
+          <h2 className="loading-news-title">Loading news...</h2>
         ) : (
           newsIds.map((id: number) => {
             return <NewsItem id={id} />;

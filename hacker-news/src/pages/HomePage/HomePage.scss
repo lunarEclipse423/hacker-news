@@ -2,13 +2,6 @@
 @import "../../sass/abstract/placeholders";
 @import "../../sass/abstract/mixins";
 
-.news-feed {
-  width: 45vw;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-}
-
 .news-items-wrapper {
   padding-top: 12px;
 }
@@ -33,7 +26,7 @@
 .current-date {
   @extend %font-primary;
   @include font(1.3rem, 1.6rem, 400);
-  color: $color-current-date;
+  color: $color-primary;
 }
 
 .sub-text__date {
@@ -50,6 +43,13 @@
     animation-duration: 1s;
     cursor: pointer;
   }
+}
+
+.loading-news-title {
+  @extend %font-primary;
+  @include font(1.8rem, 2rem, 400);
+  color: $color-primary;
+  text-align: center;
 }
 
 @keyframes rotate {

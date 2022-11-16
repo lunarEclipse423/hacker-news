@@ -3,6 +3,7 @@ import axios from "axios";
 const baseUrl = "https://hacker-news.firebaseio.com/v0/";
 const storiesIdsUrl = `${baseUrl}newstories.json?print=pretty`;
 const storyUrl = `${baseUrl}item/`;
+const commentUrl = `${baseUrl}item/`;
 const newestStoriesMaxAmount = 100;
 
 export const getNewsIds = async () => {
@@ -21,4 +22,12 @@ export const getNewsInfo = async (storyId: number) => {
     .then((response) => response.data)
     .catch((error) => console.log(`Error in getNewsInfo: ${error}`));
   return story;
+};
+
+export const getCommentInfo = async (commentId: number) => {
+  const comment = await axios
+    .get(`${commentUrl}${commentId}.json?print=pretty`)
+    .then((response) => response.data)
+    .catch((error) => console.log(`Error in getCommentInfo: ${error}`));
+  return comment;
 };
