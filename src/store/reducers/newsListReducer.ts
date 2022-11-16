@@ -1,11 +1,22 @@
-import { NewsListAction, NewsListActionTypes } from "../../types/newsList";
+import { NewsListAction, NewsListState, NewsListActionTypes } from "../../types/newsList";
 
-const initState: any[] = [];
+const initState: NewsListState = {
+  news: [],
+  newsItemsInfo: [],
+};
 
 const newsListReducer = (state = initState, action: NewsListAction): any => {
   switch (action.type) {
     case NewsListActionTypes.UPDATE:
-      return action.news;
+      return {
+        news: action.news,
+        newsItemsInfo: [],
+      };
+    case NewsListActionTypes.PUSH:
+      return {
+        ...state,
+        newsItemsInfo: [...state.newsItemsInfo, action.newsItemInfo],
+      };
     default:
       return state;
   }

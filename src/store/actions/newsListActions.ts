@@ -6,3 +6,10 @@ export const updateNewsList = (updatedList: any[]) => {
     news: updatedList,
   };
 };
+
+export const addNewsItem = (newsItem: any) => {
+  return {
+    type: NewsListActionTypes.PUSH,
+    newsItemInfo: newsItem,
+  };
+};

@@ -1,17 +1,39 @@
 import { useEffect, useState } from "react";
 import { getNewsInfo } from "../../api/service";
 import { useNavigate } from "react-router-dom";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useNewsListActions } from "../../hooks/useActions";
 import { convertTime } from "../../utils/time";
 import "./NewsItem.scss";
 
-const NewsItem = ({ id }: any) => {
-  const [newsInfo, setNewsInfo] = useState<any>({});
+type NewsItemType = {
+  id: number;
+};
+
+const NewsItem = ({ id }: NewsItemType) => {
   const navigate = useNavigate();
+  const newsItem = useTypedSelector((state) =>
+    state.newsList.newsItemsInfo.find((item: any) => item?.id === id)
+  );
+  const { addNewsItem } = useNewsListActions();
+  const [newsInfo, setNewsInfo] = useState(newsItem);
+
   useEffect(() => {
-    getNewsInfo(id).then((data) => setNewsInfo(data));
+    if (!newsItem) {
+      fetchNewsInfo();
+    }
   }, []);
 
-  return (
+  const fetchNewsInfo = async () => {
+    await getNewsInfo(id).then((data) => {
+      addNewsItem(data);
+      setNewsInfo(data);
+    });
+  };
+
+  return !newsInfo ? (
+    <div></div>
+  ) : (
     <div
       className="news-item"
       onClick={() => navigate(`/home/${id}`, { state: { newsInfo } })}

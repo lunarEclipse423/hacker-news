@@ -1,39 +1,49 @@
-import { useEffect, useState } from "react";
-import NewsItem from "../../components/NewsItem/NewsItem";
+import { useEffect, useRef, useState } from "react";
 import { useNewsListActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { getNewsIds } from "../../api/service";
 import { getDate } from "../../utils/time";
+import NewsItem from "../../components/NewsItem/NewsItem";
 import "./HomePage.scss";
 
 const HomePage = () => {
   const apiCallsInterval = 60000;
   const { updateNewsList } = useNewsListActions();
-  const newsList = useTypedSelector((state) => state.newsList);
-  const [newsIds, setNewsIds] = useState([]);
+  const newsList = useTypedSelector((state) => state.newsList.news);
+  const [newsIds, setNewsIds] = useState(newsList);
   const [isNewsListLoading, setIsNewsListLoading] = useState(false);
+  const intervalId = useRef(0);
 
   useEffect(() => {
-    console.log("use effect 1");
-    fetchNews();
-    const interval = setInterval(() => {
-      console.log("use effect 2");
+    if (newsIds.length === 0) {
+      console.log("use effect 1");
       fetchNews();
-    }, apiCallsInterval);
-    return () => clearInterval(interval);
+    }
+    if (typeof window !== "undefined") {
+      intervalId.current = window.setInterval(fetchNews, apiCallsInterval);
+    }
+    return () => clearInterval(intervalId.current);
   }, []);
 
   const fetchNews = async () => {
     setIsNewsListLoading(true);
-    getNewsIds()
+    await getNewsIds()
       .then((data) => {
         updateNewsList(data);
         setNewsIds((prevState: any) => {
-          prevState = Object.assign([], data);
+          prevState = data;
           return prevState;
         });
       })
       .finally(() => setIsNewsListLoading(false));
+  };
+
+  const handleRefresh = () => {
+    clearInterval(intervalId.current);
+    if (typeof window !== "undefined") {
+      intervalId.current = window.setInterval(fetchNews, apiCallsInterval);
+    }
+    fetchNews();
   };
 
   return (
@@ -44,7 +54,7 @@ const HomePage = () => {
           <p className="trending-text">Trending</p>
           <p className="current-date sub-text__date">{getDate()}</p>
         </div>
-        <span className="refresh-icon" onClick={fetchNews}></span>
+        <span className="refresh-icon" onClick={handleRefresh}></span>
       </div>
       <div className="news-items-wrapper">
         {isNewsListLoading ? (

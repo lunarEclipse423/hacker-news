@@ -27,7 +27,6 @@ const NewsPage = () => {
       .finally(() => setIsNewsInfoLoading(false));
   };
 
-  console.log(newsInfo);
   return (
     <div className="news-page">
       <div className="back" onClick={() => navigate("/home")}>
