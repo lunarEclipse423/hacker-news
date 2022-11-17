@@ -60,7 +60,7 @@ const HomePage = () => {
           <h2 className="loading-stories-title">Loading news...</h2>
         ) : (
           storiesIds.map((id: number) => {
-            return <Story id={id} />;
+            return <Story key={id} id={id} />;
           })
         )}
       </div>

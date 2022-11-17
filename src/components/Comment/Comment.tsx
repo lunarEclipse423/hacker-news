@@ -76,7 +76,7 @@ const Comment = ({ id }: CommentType) => {
           {isCommentClicked && commentInfo.kids ? (
             commentInfo.kids
               .sort((a: number, b: number) => b - a)
-              .map((id: number) => <Comment id={id} />)
+              .map((id: number) => <Comment key={id} id={id} />)
           ) : (
             <></>
           )}

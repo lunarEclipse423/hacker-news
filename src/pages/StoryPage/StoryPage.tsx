@@ -90,7 +90,7 @@ const StoryPage = () => {
             storyInfo
               .kids!.sort((a: number, b: number) => b - a)
               .map((id: number) => {
-                return <Comment id={id} />;
+                return <Comment key={id} id={id} />;
               })
           )}
         </div>
