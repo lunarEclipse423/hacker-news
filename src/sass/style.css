@@ -407,8 +407,36 @@ h3, h2, h1 {
   font-family: "Montserrat", Verdana, sans-serif;
 }
 
+html::-webkit-scrollbar {
+  width: 7px;
+}
+html::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #232424;
+}
+
 h3, h2, h1 {
   font-family: "Montserrat", Verdana, sans-serif;
+}
+
+html::-webkit-scrollbar {
+  width: 7px;
+}
+html::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #232424;
 }
 
 html {

@@ -16,7 +16,7 @@ const Story = ({ id }: StoryType) => {
   const { addStory } = useStoriesActions();
   const story = useTypedSelector((state) => {
     if (state.stories.storiesInfo.length !== 0) {
-      return state.stories.storiesInfo.find((story: IStory) => story.id === id);
+      return state.stories.storiesInfo.find((story: IStory) => story?.id === id);
     }
     return undefined;
   });
