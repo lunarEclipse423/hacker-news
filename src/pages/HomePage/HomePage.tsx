@@ -27,10 +27,10 @@ const HomePage = () => {
   const fetchStories = async (): Promise<void> => {
     setAreStoriesLoading(true);
     await getStoriesIds()
-      .then((data: number[]) => {
-        updateStories(data);
+      .then((fetchedIds: number[]) => {
+        updateStories(fetchedIds);
         setStoriesIds((prevState: number[]) => {
-          prevState = data;
+          prevState = fetchedIds;
           return prevState;
         });
       })

@@ -16,7 +16,7 @@ const Story = ({ id }: StoryType) => {
   const { addStory } = useStoriesActions();
   const story = useTypedSelector((state) => {
     if (state.stories.storiesInfo.length !== 0) {
-      return state.stories.storiesInfo.find((item: IStory) => item.id === id);
+      return state.stories.storiesInfo.find((story: IStory) => story.id === id);
     }
     return undefined;
   });
@@ -29,9 +29,9 @@ const Story = ({ id }: StoryType) => {
   }, []);
 
   const fetchStoryInfo = async (): Promise<void> => {
-    await getStoryInfo(id).then((data: IStory) => {
-      addStory(data);
-      setStoryInfo(data);
+    await getStoryInfo(id).then((fetchedInfo: IStory) => {
+      addStory(fetchedInfo);
+      setStoryInfo(fetchedInfo);
     });
   };
 

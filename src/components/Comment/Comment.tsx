@@ -25,8 +25,8 @@ const Comment = ({ id }: CommentType) => {
 
   useEffect(() => {
     setIsCommentLoading(true);
-    getCommentInfo(id).then((data: IComment) => {
-      setCommentInfo(data);
+    getCommentInfo(id).then((fetchedInfo: IComment) => {
+      setCommentInfo(fetchedInfo);
       setIsCommentLoading(false);
     });
   }, []);

@@ -20,9 +20,9 @@ const StoryPage = () => {
   const updateStoryInfo = async (): Promise<void> => {
     setIsStoryInfoLoading(true);
     getStoryInfo(storyInfo.id)
-      .then((data: IStory) => {
+      .then((fetchedInfo: IStory) => {
         setStoryInfo((prevState: IStory) => {
-          prevState = Object.assign([], data);
+          prevState = Object.assign([], fetchedInfo);
           return prevState;
         });
       })
