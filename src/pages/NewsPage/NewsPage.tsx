@@ -5,6 +5,7 @@ import { convertTime } from "../../utils/time";
 import { IStory } from "../../types/story";
 import CommentItem from "../../components/CommentItem/CommentItem";
 import "./NewsPage.scss";
+import { formatText } from "../../utils/formatText";
 
 const NewsPage = () => {
   const location = useLocation();
@@ -43,12 +44,22 @@ const NewsPage = () => {
           <h1 className="news-title">{newsInfo.title}</h1>
           <div className="news-info">
             <span className="news-link-text">
-              Link:{" "}
-              <a href={`${newsInfo.url}`} className="news-link" target="_blank">
-                {`${newsInfo.url}`}
-              </a>
+              {newsInfo.url ? (
+                <>
+                  Link:{" "}
+                  <a href={`${newsInfo.url}`} className="news-link" target="_blank">
+                    {`${newsInfo.url}`}
+                  </a>
+                </>
+              ) : newsInfo.text ? (
+                <>
+                  <p>{formatText(newsInfo.text)}</p>
+                  <p className="link-text">Link: link is not provided</p>
+                </>
+              ) : (
+                <>No link or text was provided</>
+              )}
             </span>
-
             <div className="news-author-and-date">
               <span className="news-author">by {newsInfo.by} | </span>
               <span className="news-date">{`${convertTime(newsInfo.time)}`} | </span>

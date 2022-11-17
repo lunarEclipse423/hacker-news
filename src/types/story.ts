@@ -8,4 +8,5 @@ export interface IStory {
   type: string;
   kids?: number[];
   url?: string;
+  text?: string;
 }
