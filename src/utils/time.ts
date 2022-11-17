@@ -13,13 +13,6 @@ export const convertTime = (unixTimestamp: number): string => {
   return currentDate;
 };
 
-export const getHoursPassed = (timePosted: number): string => {
-  const timePassed = Date.now() - timePosted;
-  const hoursPassed = new Date(timePassed * 1000).getHours();
-  const resultString = hoursPassed + " " + (hoursPassed > 1 ? "hours" : "hour");
-  return resultString;
-};
-
 export const getDate = (): string => {
   const date = new Date();
   const options: Intl.DateTimeFormatOptions = {
