@@ -1,4 +1,4 @@
-export const convertTime = (unixTimestamp: number): string => {
+export const getFullCurrentDate = (unixTimestamp: number): string => {
   const date = new Date(unixTimestamp * 1000);
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
@@ -13,7 +13,7 @@ export const convertTime = (unixTimestamp: number): string => {
   return currentDate;
 };
 
-export const getDate = (): string => {
+export const getShortCurrentDate = (): string => {
   const date = new Date();
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",

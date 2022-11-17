@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as NewsListActionCreators from "../store/actions/storiesActions";
+import * as StoriesActionCreators from "../store/actions/storiesActions";
 
-export const useNewsListActions = () => {
+export const useStoriesActions = () => {
   const dispatch = useDispatch();
-  return bindActionCreators(NewsListActionCreators, dispatch);
+  return bindActionCreators(StoriesActionCreators, dispatch);
 };

@@ -2,7 +2,7 @@
 @import "../../sass/abstract/placeholders";
 @import "../../sass/abstract/mixins";
 
-.news-page {
+.story-page {
   padding: 20px 0 0;
   display: flex;
   flex-direction: column;
@@ -46,17 +46,17 @@
   background-image: url("../../svg/icon_back.svg");
 }
 
-.news-content {
+.story-content {
   display: flex;
 }
 
-.news-score-wrapper {
+.story-score-wrapper {
   padding-top: 5px;
   display: flex;
   justify-content: center;
 }
 
-.news-score-icon {
+.story-score-icon {
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -64,26 +64,27 @@
   transform: rotate(180deg);
 }
 
-.news-score {
+.story-score {
   @include font(2rem, 2.7rem, 700);
   color: $color-text;
 }
 
-.news-text-wrapper {
+.story-text-wrapper {
   padding-left: 20px;
+  max-width: 600px;
 }
 
-.news-title {
+.story-page-title {
   margin: 0;
   margin-bottom: 10px;
 }
 
-.news-info {
+.story-page-info {
   @extend %font-secondary;
   @include font(1.5rem, 2.2rem, 400);
 }
 
-.news-page__comments-section {
+.story-page__comments-section {
   margin-top: 25px;
 }
 
@@ -117,11 +118,11 @@
   text-align: center;
 }
 
-.news-date {
+.story-page-date {
   margin-left: 5px;
 }
 
-.news-author-and-date {
+.story-page-author-and-date {
   display: flex;
 }
 

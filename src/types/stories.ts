@@ -5,13 +5,13 @@ export enum StoriesActionTypes {
   PUSH = "PUSH",
 }
 
-export interface StoriesAction {
+export interface IStoriesAction {
   type: string;
   storiesIds: number[];
   storyInfo: IStory;
 }
 
-export interface StoriesState {
+export interface IStoriesState {
   storiesIds: number[];
   storiesInfo: IStory[];
 }

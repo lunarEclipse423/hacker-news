@@ -2,7 +2,7 @@
 @import "../../sass/abstract/placeholders";
 @import "../../sass/abstract/mixins";
 
-.news-items-wrapper {
+.stories-wrapper {
   padding-top: 12px;
 }
 
@@ -45,7 +45,7 @@
   }
 }
 
-.loading-news-title {
+.loading-stories-title {
   @extend %font-primary;
   @include font(1.8rem, 2rem, 400);
   color: $color-primary;

@@ -1,66 +1,66 @@
 import { useEffect, useRef, useState } from "react";
-import { useNewsListActions } from "../../hooks/useActions";
+import { useStoriesActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { getNewsIds } from "../../api/service";
-import { getDate } from "../../utils/time";
-import NewsItem from "../../components/NewsItem/NewsItem";
+import { getStoriesIds } from "../../api/service";
+import { getShortCurrentDate } from "../../utils/getDate";
+import Story from "../../components/Story/Story";
 import "./HomePage.scss";
 
 const HomePage = () => {
   const apiCallsInterval = 60000;
-  const { updateStories } = useNewsListActions();
-  const newsList = useTypedSelector((state) => state.stories.storiesIds);
-  const [newsIds, setNewsIds] = useState<number[]>(newsList);
-  const [isNewsListLoading, setIsNewsListLoading] = useState<boolean>(false);
+  const { updateStories } = useStoriesActions();
+  const storageStoriesIds = useTypedSelector((state) => state.stories.storiesIds);
+  const [storiesIds, setStoriesIds] = useState<number[]>(storageStoriesIds);
+  const [areStoriesLoading, setAreStoriesLoading] = useState<boolean>(false);
   const intervalId = useRef(0);
 
   useEffect(() => {
-    if (newsIds.length === 0) {
-      fetchNews();
+    if (storiesIds.length === 0) {
+      fetchStories();
     }
     if (typeof window !== "undefined") {
-      intervalId.current = window.setInterval(fetchNews, apiCallsInterval);
+      intervalId.current = window.setInterval(fetchStories, apiCallsInterval);
     }
     return () => clearInterval(intervalId.current);
   }, []);
 
-  const fetchNews = async (): Promise<void> => {
-    setIsNewsListLoading(true);
-    await getNewsIds()
+  const fetchStories = async (): Promise<void> => {
+    setAreStoriesLoading(true);
+    await getStoriesIds()
       .then((data: number[]) => {
         updateStories(data);
-        setNewsIds((prevState: number[]) => {
+        setStoriesIds((prevState: number[]) => {
           prevState = data;
           return prevState;
         });
       })
-      .finally(() => setIsNewsListLoading(false));
+      .finally(() => setAreStoriesLoading(false));
   };
 
   const handleRefresh = (): void => {
     clearInterval(intervalId.current);
     if (typeof window !== "undefined") {
-      intervalId.current = window.setInterval(fetchNews, apiCallsInterval);
+      intervalId.current = window.setInterval(fetchStories, apiCallsInterval);
     }
-    fetchNews();
+    fetchStories();
   };
 
   return (
-    <div className="news-feed">
+    <div className="feed">
       <h1 className="home-title">Hacker News</h1>
       <div className="tools">
         <div className="current-date-text">
           <p className="trending-text">Trending</p>
-          <p className="current-date sub-text__date">{getDate()}</p>
+          <p className="current-date sub-text__date">{getShortCurrentDate()}</p>
         </div>
         <span className="refresh-icon" onClick={handleRefresh}></span>
       </div>
-      <div className="news-items-wrapper">
-        {isNewsListLoading ? (
-          <h2 className="loading-news-title">Loading news...</h2>
+      <div className="stories-wrapper">
+        {areStoriesLoading ? (
+          <h2 className="loading-stories-title">Loading news...</h2>
         ) : (
-          newsIds.map((id: number) => {
-            return <NewsItem id={id} />;
+          storiesIds.map((id: number) => {
+            return <Story id={id} />;
           })
         )}
       </div>

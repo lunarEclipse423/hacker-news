@@ -2,11 +2,11 @@
 @import "../../sass/abstract/placeholders";
 @import "../../sass/abstract/mixins";
 
-.news-item {
+.story {
   margin: 12px 0;
   padding: 12px 16px;
   background-color: $color-light;
-  border: 1px solid $color-news-item-border;
+  border: 1px solid $color-story-border;
   border-radius: 16px;
   &:hover {
     border: 1px solid $color-border-active;
@@ -14,12 +14,12 @@
   }
 }
 
-.item-text__info {
+.story__story-info {
   margin-top: 10px;
   margin-bottom: 15px;
 }
 
-.item-info {
+.story-info {
   margin-bottom: 0;
   display: flex;
   @extend %font-primary;
@@ -34,7 +34,7 @@
   background-image: url("../../svg/icon_points.svg");
 }
 
-.news-item__icon {
+.story__points-icon {
   margin-right: 5px;
   margin-left: 5px;
 }

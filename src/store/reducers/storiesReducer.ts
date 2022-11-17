@@ -1,11 +1,11 @@
-import { StoriesAction, StoriesState, StoriesActionTypes } from "../../types/stories";
+import { IStoriesAction, IStoriesState, StoriesActionTypes } from "../../types/stories";
 
-const initState: StoriesState = {
+const initState: IStoriesState = {
   storiesIds: [],
   storiesInfo: [],
 };
 
-const storiesReducer = (state = initState, action: StoriesAction): StoriesState => {
+const storiesReducer = (state = initState, action: IStoriesAction): IStoriesState => {
   switch (action.type) {
     case StoriesActionTypes.UPDATE:
       return {

@@ -1,7 +1,7 @@
 import HomePage from "../pages/HomePage/HomePage";
-import NewsPage from "../pages/NewsPage/NewsPage";
+import StoryPage from "../pages/StoryPage/StoryPage";
 
 export const routes = [
   { path: "/home", element: HomePage },
-  { path: "/home/:id", element: NewsPage },
+  { path: "/home/:id", element: StoryPage },
 ];

@@ -8,21 +8,21 @@ const storyUrl = `${baseUrl}item/`;
 const commentUrl = `${baseUrl}item/`;
 const newestStoriesMaxAmount = 100;
 
-export const getNewsIds = async (): Promise<number[]> => {
+export const getStoriesIds = async (): Promise<number[]> => {
   const newestStoriesIds = await axios
     .get(storiesIdsUrl)
     .then((response) =>
       response.data.sort((a: number, b: number) => b - a).slice(0, newestStoriesMaxAmount)
     )
-    .catch((error) => console.log(`Error in getNewsIds: ${error}`));
+    .catch((error) => console.log(`Error in getStoriesIds: ${error}`));
   return newestStoriesIds;
 };
 
-export const getNewsInfo = async (storyId: number): Promise<IStory> => {
+export const getStoryInfo = async (storyId: number): Promise<IStory> => {
   const story = await axios
     .get(`${storyUrl}${storyId}.json?print=pretty`)
     .then((response) => response.data)
-    .catch((error) => console.log(`Error in getNewsInfo: ${error}`));
+    .catch((error) => console.log(`Error in getStoryInfo: ${error}`));
   return story;
 };
 

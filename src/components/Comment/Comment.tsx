@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getCommentInfo } from "../../api/service";
 import { formatText } from "../../utils/formatText";
-import { getCommentDate } from "../../utils/time";
+import { getCommentDate } from "../../utils/getDate";
 import { IComment } from "../../types/comment";
-import "./CommentItem.scss";
+import "./Comment.scss";
 
 const initialCommentInfoValue: IComment = {
   by: "",
@@ -14,11 +14,11 @@ const initialCommentInfoValue: IComment = {
   type: "",
 };
 
-type CommentItemType = {
+type CommentType = {
   id: number;
 };
 
-const CommentItem = ({ id }: CommentItemType) => {
+const Comment = ({ id }: CommentType) => {
   const [commentInfo, setCommentInfo] = useState<IComment>(initialCommentInfoValue);
   const [isCommentClicked, setIsCommentClicked] = useState<boolean>(false);
   const [isCommentLoading, setIsCommentLoading] = useState<boolean>(false);
@@ -55,10 +55,8 @@ const CommentItem = ({ id }: CommentItemType) => {
           ) : (
             <>
               <div className="comment-author-and-date">
-                <span className="item-author">by {commentInfo.by} | </span>
-                <span className="item-date item-info__pos">
-                  {`${getCommentDate(commentInfo.time)}`}
-                </span>
+                <span className="author">by {commentInfo.by} | </span>
+                <span className="date">{`${getCommentDate(commentInfo.time)}`}</span>
               </div>
               <p className="comment-text">{formatText(commentInfo.text)}</p>
             </>
@@ -78,7 +76,7 @@ const CommentItem = ({ id }: CommentItemType) => {
           {isCommentClicked && commentInfo.kids ? (
             commentInfo.kids
               .sort((a: number, b: number) => b - a)
-              .map((id: number) => <CommentItem id={id} />)
+              .map((id: number) => <Comment id={id} />)
           ) : (
             <></>
           )}
@@ -88,4 +86,4 @@ const CommentItem = ({ id }: CommentItemType) => {
   );
 };
 
-export default CommentItem;
+export default Comment;
