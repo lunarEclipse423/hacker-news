@@ -10,6 +10,13 @@
   border-radius: 16px;
 }
 
+.comment-is-loading-title {
+  @extend %font-primary;
+  @include font(1.5rem, 1.7rem, 400);
+  color: $color-primary;
+  text-align: center;
+}
+
 .comment-with-replies {
   &:hover {
     border: 1px solid $color-border-active;

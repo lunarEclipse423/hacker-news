@@ -21,9 +21,14 @@ type CommentItemType = {
 const CommentItem = ({ id }: CommentItemType) => {
   const [commentInfo, setCommentInfo] = useState<IComment>(initialCommentInfoValue);
   const [isCommentClicked, setIsCommentClicked] = useState<boolean>(false);
+  const [isCommentLoading, setIsCommentLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    getCommentInfo(id).then((data: IComment) => setCommentInfo(data));
+    setIsCommentLoading(true);
+    getCommentInfo(id).then((data: IComment) => {
+      setCommentInfo(data);
+      setIsCommentLoading(false);
+    });
   }, []);
 
   const handleClick = (): void => {
@@ -39,29 +44,35 @@ const CommentItem = ({ id }: CommentItemType) => {
       }`}
       onClick={handleClick}
     >
-      <div className="comment-author-and-date">
-        <span className="item-author">by {commentInfo.by} | </span>
-        <span className="item-date item-info__pos">
-          {`${getCommentDate(commentInfo.time)}`}
-        </span>
-      </div>
-      <p className="comment-text">{formatText(commentInfo.text)}</p>
-      <div className="replies">
-        <span className="replies-icon"></span>
-        <span className="replies-count">{`${
-          commentInfo.kids ? commentInfo.kids.length : 0
-        } ${
-          commentInfo.kids
-            ? commentInfo.kids.length > 1
-              ? "replies"
-              : "reply"
-            : "replies"
-        }`}</span>
-      </div>
-      {isCommentClicked && commentInfo.kids ? (
-        commentInfo.kids.map((id: number) => <CommentItem id={id} />)
+      {isCommentLoading ? (
+        <h2 className="comment-is-loading-title">Comment is loading...</h2>
       ) : (
-        <></>
+        <>
+          <div className="comment-author-and-date">
+            <span className="item-author">by {commentInfo.by} | </span>
+            <span className="item-date item-info__pos">
+              {`${getCommentDate(commentInfo.time)}`}
+            </span>
+          </div>
+          <p className="comment-text">{formatText(commentInfo.text)}</p>
+          <div className="replies">
+            <span className="replies-icon"></span>
+            <span className="replies-count">{`${
+              commentInfo.kids ? commentInfo.kids.length : 0
+            } ${
+              commentInfo.kids
+                ? commentInfo.kids.length > 1
+                  ? "replies"
+                  : "reply"
+                : "replies"
+            }`}</span>
+          </div>
+          {isCommentClicked && commentInfo.kids ? (
+            commentInfo.kids.map((id: number) => <CommentItem id={id} />)
+          ) : (
+            <></>
+          )}
+        </>
       )}
     </div>
   );
