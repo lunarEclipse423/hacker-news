@@ -9,7 +9,7 @@ import "./HomePage.scss";
 const HomePage = () => {
   const apiCallsInterval = 60000;
   const { updateNewsList } = useNewsListActions();
-  const newsList = useTypedSelector((state) => state.newsList.news);
+  const newsList = useTypedSelector((state) => state.newsList.storiesIds);
   const [newsIds, setNewsIds] = useState<number[]>(newsList);
   const [isNewsListLoading, setIsNewsListLoading] = useState<boolean>(false);
   const intervalId = useRef(0);

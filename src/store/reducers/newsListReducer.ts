@@ -1,7 +1,7 @@
 import { NewsListAction, NewsListState, NewsListActionTypes } from "../../types/newsList";
 
 const initState: NewsListState = {
-  news: [],
+  storiesIds: [],
   newsItemsInfo: [],
 };
 
@@ -9,7 +9,7 @@ const newsListReducer = (state = initState, action: NewsListAction): NewsListSta
   switch (action.type) {
     case NewsListActionTypes.UPDATE:
       return {
-        news: action.news,
+        storiesIds: action.storiesIds,
         newsItemsInfo: [],
       };
     case NewsListActionTypes.PUSH:

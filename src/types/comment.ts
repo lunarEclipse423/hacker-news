@@ -7,4 +7,5 @@ export interface IComment {
   type: string;
   kids?: number[];
   dead?: boolean;
+  deleted?: boolean;
 }

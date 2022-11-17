@@ -35,6 +35,12 @@
   @extend %font-secondary;
 }
 
+.dead-comment-text {
+  margin-bottom: 10px;
+  @extend %font-secondary;
+  @include font(1.5rem, 2.2rem, 400);
+}
+
 .replies {
   display: flex;
   align-items: center;

@@ -35,7 +35,7 @@ const CommentItem = ({ id }: CommentItemType) => {
     setIsCommentClicked(true);
   };
 
-  return commentInfo?.dead ? (
+  return commentInfo?.deleted ? (
     <></>
   ) : (
     <div
@@ -48,13 +48,21 @@ const CommentItem = ({ id }: CommentItemType) => {
         <h2 className="comment-is-loading-title">Comment is loading...</h2>
       ) : (
         <>
-          <div className="comment-author-and-date">
-            <span className="item-author">by {commentInfo.by} | </span>
-            <span className="item-date item-info__pos">
-              {`${getCommentDate(commentInfo.time)}`}
-            </span>
-          </div>
-          <p className="comment-text">{formatText(commentInfo.text)}</p>
+          {commentInfo?.dead ? (
+            <p className="dead-comment-text">
+              <i>[this comment is dead]</i>
+            </p>
+          ) : (
+            <>
+              <div className="comment-author-and-date">
+                <span className="item-author">by {commentInfo.by} | </span>
+                <span className="item-date item-info__pos">
+                  {`${getCommentDate(commentInfo.time)}`}
+                </span>
+              </div>
+              <p className="comment-text">{formatText(commentInfo.text)}</p>
+            </>
+          )}
           <div className="replies">
             <span className="replies-icon"></span>
             <span className="replies-count">{`${

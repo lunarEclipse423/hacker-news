@@ -7,11 +7,11 @@ export enum NewsListActionTypes {
 
 export interface NewsListAction {
   type: string;
-  news: number[];
+  storiesIds: number[];
   newsItemInfo: IStory;
 }
 
 export interface NewsListState {
-  news: number[];
+  storiesIds: number[];
   newsItemsInfo: IStory[];
 }

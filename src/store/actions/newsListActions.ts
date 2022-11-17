@@ -4,7 +4,7 @@ import { IStory } from "../../types/story";
 export const updateNewsList = (updatedList: number[]) => {
   return {
     type: NewsListActionTypes.UPDATE,
-    news: updatedList,
+    storiesIds: updatedList,
   };
 };
 
