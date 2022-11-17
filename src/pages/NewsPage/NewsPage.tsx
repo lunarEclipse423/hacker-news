@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getNewsInfo } from "../../api/service";
-import CommentItem from "../../components/CommentItem/CommentItem";
 import { convertTime } from "../../utils/time";
+import { IStory } from "../../types/story";
+import CommentItem from "../../components/CommentItem/CommentItem";
 import "./NewsPage.scss";
 
 const NewsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [newsInfo, setNewsInfo] = useState(location.state.newsInfo);
-  const [isNewsInfoLoading, setIsNewsInfoLoading] = useState(false);
+  const [newsInfo, setNewsInfo] = useState<IStory>(location.state.newsInfo);
+  const [isNewsInfoLoading, setIsNewsInfoLoading] = useState<boolean>(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const updateNewsInfo = async () => {
+  const updateNewsInfo = async (): Promise<void> => {
     setIsNewsInfoLoading(true);
     getNewsInfo(newsInfo.id)
-      .then((data) => {
-        setNewsInfo((prevState: any) => {
+      .then((data: IStory) => {
+        setNewsInfo((prevState: IStory) => {
           prevState = Object.assign([], data);
           return prevState;
         });
@@ -73,8 +74,8 @@ const NewsPage = () => {
           ) : newsInfo.descendants === 0 ? (
             <p className="no-comments-text">No comments yet</p>
           ) : (
-            newsInfo.kids
-              .sort((a: number, b: number) => b - a)
+            newsInfo
+              .kids!.sort((a: number, b: number) => b - a)
               .map((id: number) => {
                 return <CommentItem id={id} />;
               })

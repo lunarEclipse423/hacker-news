@@ -1,4 +1,6 @@
 import axios from "axios";
+import { IStory } from "../types/story";
+import { IComment } from "../types/comment";
 
 const baseUrl = "https://hacker-news.firebaseio.com/v0/";
 const storiesIdsUrl = `${baseUrl}newstories.json?print=pretty`;
@@ -6,7 +8,7 @@ const storyUrl = `${baseUrl}item/`;
 const commentUrl = `${baseUrl}item/`;
 const newestStoriesMaxAmount = 100;
 
-export const getNewsIds = async () => {
+export const getNewsIds = async (): Promise<number[]> => {
   const newestStoriesIds = await axios
     .get(storiesIdsUrl)
     .then((response) =>
@@ -16,7 +18,7 @@ export const getNewsIds = async () => {
   return newestStoriesIds;
 };
 
-export const getNewsInfo = async (storyId: number) => {
+export const getNewsInfo = async (storyId: number): Promise<IStory> => {
   const story = await axios
     .get(`${storyUrl}${storyId}.json?print=pretty`)
     .then((response) => response.data)
@@ -24,7 +26,7 @@ export const getNewsInfo = async (storyId: number) => {
   return story;
 };
 
-export const getCommentInfo = async (commentId: number) => {
+export const getCommentInfo = async (commentId: number): Promise<IComment> => {
   const comment = await axios
     .get(`${commentUrl}${commentId}.json?print=pretty`)
     .then((response) => response.data)

@@ -10,13 +10,12 @@ const HomePage = () => {
   const apiCallsInterval = 60000;
   const { updateNewsList } = useNewsListActions();
   const newsList = useTypedSelector((state) => state.newsList.news);
-  const [newsIds, setNewsIds] = useState(newsList);
-  const [isNewsListLoading, setIsNewsListLoading] = useState(false);
+  const [newsIds, setNewsIds] = useState<number[]>(newsList);
+  const [isNewsListLoading, setIsNewsListLoading] = useState<boolean>(false);
   const intervalId = useRef(0);
 
   useEffect(() => {
     if (newsIds.length === 0) {
-      console.log("use effect 1");
       fetchNews();
     }
     if (typeof window !== "undefined") {
@@ -25,12 +24,12 @@ const HomePage = () => {
     return () => clearInterval(intervalId.current);
   }, []);
 
-  const fetchNews = async () => {
+  const fetchNews = async (): Promise<void> => {
     setIsNewsListLoading(true);
     await getNewsIds()
-      .then((data) => {
+      .then((data: number[]) => {
         updateNewsList(data);
-        setNewsIds((prevState: any) => {
+        setNewsIds((prevState: number[]) => {
           prevState = data;
           return prevState;
         });
@@ -38,7 +37,7 @@ const HomePage = () => {
       .finally(() => setIsNewsListLoading(false));
   };
 
-  const handleRefresh = () => {
+  const handleRefresh = (): void => {
     clearInterval(intervalId.current);
     if (typeof window !== "undefined") {
       intervalId.current = window.setInterval(fetchNews, apiCallsInterval);

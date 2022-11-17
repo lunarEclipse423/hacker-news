@@ -5,7 +5,7 @@ const initState: NewsListState = {
   newsItemsInfo: [],
 };
 
-const newsListReducer = (state = initState, action: NewsListAction): any => {
+const newsListReducer = (state = initState, action: NewsListAction): NewsListState => {
   switch (action.type) {
     case NewsListActionTypes.UPDATE:
       return {

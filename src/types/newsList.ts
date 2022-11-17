@@ -1,3 +1,5 @@
+import { IStory } from "./story";
+
 export enum NewsListActionTypes {
   UPDATE = "UPDATE",
   PUSH = "PUSH",
@@ -5,11 +7,11 @@ export enum NewsListActionTypes {
 
 export interface NewsListAction {
   type: string;
-  news: any[];
-  newsItemInfo: any;
+  news: number[];
+  newsItemInfo: IStory;
 }
 
 export interface NewsListState {
-  news: any[];
-  newsItemsInfo: any[];
+  news: number[];
+  newsItemsInfo: IStory[];
 }

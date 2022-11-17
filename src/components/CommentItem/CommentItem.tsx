@@ -2,23 +2,37 @@ import { useEffect, useState } from "react";
 import { getCommentInfo } from "../../api/service";
 import { formatText } from "../../utils/formatText";
 import { getCommentDate } from "../../utils/time";
+import { IComment } from "../../types/comment";
 import "./CommentItem.scss";
 
-const CommentItem = ({ id }: any) => {
-  const [commentInfo, setCommentInfo] = useState<any>({});
-  const [isCommentClicked, setIsCommentClicked] = useState(false);
+const initialCommentInfoValue: IComment = {
+  by: "",
+  id: -1,
+  parent: -1,
+  text: "",
+  time: -1,
+  type: "",
+};
+
+type CommentItemType = {
+  id: number;
+};
+
+const CommentItem = ({ id }: CommentItemType) => {
+  const [commentInfo, setCommentInfo] = useState<IComment>(initialCommentInfoValue);
+  const [isCommentClicked, setIsCommentClicked] = useState<boolean>(false);
 
   useEffect(() => {
-    getCommentInfo(id).then((data) => setCommentInfo(data));
+    getCommentInfo(id).then((data: IComment) => setCommentInfo(data));
   }, []);
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     setIsCommentClicked(true);
   };
 
-  console.log("Comment Info");
-  console.log(commentInfo);
-  return (
+  return commentInfo?.dead ? (
+    <></>
+  ) : (
     <div
       className={`comment-content ${
         commentInfo.kids && !isCommentClicked ? "comment-with-replies" : ""
@@ -44,9 +58,11 @@ const CommentItem = ({ id }: any) => {
             : "replies"
         }`}</span>
       </div>
-      {isCommentClicked && commentInfo.kids
-        ? commentInfo.kids.map((id: number) => <CommentItem id={id} />)
-        : ""}
+      {isCommentClicked && commentInfo.kids ? (
+        commentInfo.kids.map((id: number) => <CommentItem id={id} />)
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

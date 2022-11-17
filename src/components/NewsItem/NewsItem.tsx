@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { getNewsInfo } from "../../api/service";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useNewsListActions } from "../../hooks/useActions";
+import { getNewsInfo } from "../../api/service";
 import { convertTime } from "../../utils/time";
+import { IStory } from "../../types/story";
 import "./NewsItem.scss";
 
 type NewsItemType = {
@@ -12,11 +13,14 @@ type NewsItemType = {
 
 const NewsItem = ({ id }: NewsItemType) => {
   const navigate = useNavigate();
-  const newsItem = useTypedSelector((state) =>
-    state.newsList.newsItemsInfo.find((item: any) => item?.id === id)
-  );
   const { addNewsItem } = useNewsListActions();
-  const [newsInfo, setNewsInfo] = useState(newsItem);
+  const newsItem = useTypedSelector((state) => {
+    if (state.newsList.newsItemsInfo.length !== 0) {
+      return state.newsList.newsItemsInfo.find((item: IStory) => item.id === id);
+    }
+    return undefined;
+  });
+  const [newsInfo, setNewsInfo] = useState<IStory | undefined>(newsItem);
 
   useEffect(() => {
     if (!newsItem) {
@@ -24,15 +28,15 @@ const NewsItem = ({ id }: NewsItemType) => {
     }
   }, []);
 
-  const fetchNewsInfo = async () => {
-    await getNewsInfo(id).then((data) => {
+  const fetchNewsInfo = async (): Promise<void> => {
+    await getNewsInfo(id).then((data: IStory) => {
       addNewsItem(data);
       setNewsInfo(data);
     });
   };
 
   return !newsInfo ? (
-    <div></div>
+    <></>
   ) : (
     <div
       className="news-item"

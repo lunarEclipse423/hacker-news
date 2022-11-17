@@ -1,4 +1,4 @@
-export const convertTime = (unixTimestamp: number) => {
+export const convertTime = (unixTimestamp: number): string => {
   const date = new Date(unixTimestamp * 1000);
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
@@ -13,14 +13,14 @@ export const convertTime = (unixTimestamp: number) => {
   return currentDate;
 };
 
-export const getHoursPassed = (timePosted: number) => {
+export const getHoursPassed = (timePosted: number): string => {
   const timePassed = Date.now() - timePosted;
   const hoursPassed = new Date(timePassed * 1000).getHours();
   const resultString = hoursPassed + " " + (hoursPassed > 1 ? "hours" : "hour");
   return resultString;
 };
 
-export const getDate = () => {
+export const getDate = (): string => {
   const date = new Date();
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
@@ -32,7 +32,7 @@ export const getDate = () => {
   return currentDate;
 };
 
-export const getCommentDate = (unixTimestamp: number) => {
+export const getCommentDate = (unixTimestamp: number): string => {
   const date = new Date(unixTimestamp * 1000);
   const options: Intl.DateTimeFormatOptions = {
     month: "long",
