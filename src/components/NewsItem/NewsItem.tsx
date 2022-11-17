@@ -13,10 +13,10 @@ type NewsItemType = {
 
 const NewsItem = ({ id }: NewsItemType) => {
   const navigate = useNavigate();
-  const { addNewsItem } = useNewsListActions();
+  const { addStory } = useNewsListActions();
   const newsItem = useTypedSelector((state) => {
-    if (state.newsList.newsItemsInfo.length !== 0) {
-      return state.newsList.newsItemsInfo.find((item: IStory) => item.id === id);
+    if (state.stories.storiesInfo.length !== 0) {
+      return state.stories.storiesInfo.find((item: IStory) => item.id === id);
     }
     return undefined;
   });
@@ -30,7 +30,7 @@ const NewsItem = ({ id }: NewsItemType) => {
 
   const fetchNewsInfo = async (): Promise<void> => {
     await getNewsInfo(id).then((data: IStory) => {
-      addNewsItem(data);
+      addStory(data);
       setNewsInfo(data);
     });
   };
