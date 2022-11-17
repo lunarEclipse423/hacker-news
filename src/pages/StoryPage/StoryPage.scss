@@ -1,0 +1,151 @@
+@import "../../sass/abstract/constants";
+@import "../../sass/abstract/placeholders";
+@import "../../sass/abstract/mixins";
+
+.story-page {
+  padding: 20px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.back {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: -70px;
+  background-color: $color-light;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    .back-icon {
+      animation-name: shift;
+      animation-duration: 1s;
+    }
+  }
+}
+
+@keyframes shift {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.back-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url("../../svg/icon_back.svg");
+}
+
+.story-content {
+  display: flex;
+}
+
+.story-score-wrapper {
+  padding-top: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.story-score-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("../../svg/icon_score.svg");
+  transform: rotate(180deg);
+}
+
+.story-score {
+  @include font(2rem, 2.7rem, 700);
+  color: $color-text;
+}
+
+.story-text-wrapper {
+  padding-left: 20px;
+  max-width: 600px;
+}
+
+.story-page-title {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.story-page-info {
+  @extend %font-secondary;
+  @include font(1.5rem, 2.2rem, 400);
+}
+
+.story-page__comments-section {
+  margin-top: 25px;
+}
+
+.comments-tools {
+  padding: 0 55px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comments-section__tools {
+  margin-bottom: 25px;
+}
+
+.comments-title {
+  @extend %font-secondary;
+  @include font(2rem, 2.3rem, 700);
+}
+
+.no-comments-text {
+  @extend %font-primary;
+  @include font(1.8rem, 2rem, 400);
+  color: $color-primary;
+  text-align: center;
+}
+
+.loading-comments-title {
+  @extend %font-primary;
+  @include font(1.8rem, 2rem, 400);
+  color: $color-primary;
+  text-align: center;
+}
+
+.story-page-date {
+  margin-left: 5px;
+}
+
+.story-page-author-and-date {
+  display: flex;
+}
+
+.comments-count-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.comments-count {
+  margin-left: 5px;
+}
+
+.comment-count__icon {
+  margin-left: 5px;
+}
+
+.comment-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("../../svg/icon_comment.svg");
+}
+
+.link-text {
+  margin-top: 5px;
+}

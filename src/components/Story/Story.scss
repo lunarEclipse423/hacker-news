@@ -1,0 +1,40 @@
+@import "../../sass/abstract/constants";
+@import "../../sass/abstract/placeholders";
+@import "../../sass/abstract/mixins";
+
+.story {
+  margin: 12px 0;
+  padding: 12px 16px;
+  background-color: $color-light;
+  border: 1px solid $color-story-border;
+  border-radius: 16px;
+  &:hover {
+    border: 1px solid $color-border-active;
+    cursor: pointer;
+  }
+}
+
+.story__story-info {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.story-info {
+  margin-bottom: 0;
+  display: flex;
+  @extend %font-primary;
+  @include font(1.3rem, 1.6rem, 400);
+  color: $color-primary;
+}
+
+.points-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../../svg/icon_points.svg");
+}
+
+.story__points-icon {
+  margin-right: 5px;
+  margin-left: 5px;
+}
