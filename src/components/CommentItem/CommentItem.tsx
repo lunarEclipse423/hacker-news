@@ -76,7 +76,9 @@ const CommentItem = ({ id }: CommentItemType) => {
             }`}</span>
           </div>
           {isCommentClicked && commentInfo.kids ? (
-            commentInfo.kids.map((id: number) => <CommentItem id={id} />)
+            commentInfo.kids
+              .sort((a: number, b: number) => b - a)
+              .map((id: number) => <CommentItem id={id} />)
           ) : (
             <></>
           )}
