@@ -14,7 +14,9 @@ export const getStoriesIds = async (): Promise<number[]> => {
     .then((response) =>
       response.data.sort((a: number, b: number) => b - a).slice(0, newestStoriesMaxAmount)
     )
-    .catch((error) => console.log(`Error in getStoriesIds: ${error}`));
+    .catch((error) => {
+      throw error;
+    });
   return newestStoriesIds;
 };
 
@@ -22,7 +24,9 @@ export const getStoryInfo = async (storyId: number): Promise<IStory> => {
   const story = await axios
     .get(`${storyUrl}${storyId}.json?print=pretty`)
     .then((response) => response.data)
-    .catch((error) => console.log(`Error in getStoryInfo: ${error}`));
+    .catch((error) => {
+      throw error;
+    });
   return story;
 };
 
@@ -30,6 +34,8 @@ export const getCommentInfo = async (commentId: number): Promise<IComment> => {
   const comment = await axios
     .get(`${commentUrl}${commentId}.json?print=pretty`)
     .then((response) => response.data)
-    .catch((error) => console.log(`Error in getCommentInfo: ${error}`));
+    .catch((error) => {
+      throw error;
+    });
   return comment;
 };

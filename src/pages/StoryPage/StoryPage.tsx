@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getStoryInfo } from "../../api/service";
 import { getFullCurrentDate } from "../../utils/getDate";
-import { IStory } from "../../types/story";
 import { formatText } from "../../utils/formatText";
+import { IStory } from "../../types/story";
 import Comment from "../../components/Comment/Comment";
 import "./StoryPage.scss";
 

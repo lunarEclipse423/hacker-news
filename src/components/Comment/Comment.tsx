@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCommentInfo } from "../../api/service";
-import { formatText } from "../../utils/formatText";
 import { getCommentDate } from "../../utils/getDate";
+import { formatText } from "../../utils/formatText";
 import { IComment } from "../../types/comment";
 import "./Comment.scss";
 
